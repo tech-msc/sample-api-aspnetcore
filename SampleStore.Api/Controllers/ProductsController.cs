@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace SampleStore.Api.Controllers
 {
+    // TODO - Update: Methods
     public class ProductsController : Controller
     {
         private readonly DataContext _context;
@@ -28,25 +29,25 @@ namespace SampleStore.Api.Controllers
             return Ok();
         }
 
-        #region Post Collection
-            [HttpPost]
-            [Produces("application/json")]
-            [Route("v1/products/collection")] // input collection JSOn
-            public async Task<IActionResult> PostCollection([FromBody] IEnumerable<Product> list_p)
-            {
+        // #region Post Collection
+        //     [HttpPost]
+        //     [Produces("application/json")]
+        //     [Route("v1/products/collection")]
+        //     public async Task<IActionResult> PostCollection([FromBody] IEnumerable<Product> list_p)
+        //     {
 
-                IEnumerable<Product> Prds = list_p;
-                Console.WriteLine("############\n#\n#\n#  ENTREI AQUI\n#\n#############");
+        //         IEnumerable<Product> Prds = list_p;
+        //         Console.WriteLine("############\n#\n#\n#  ENTREI AQUI\n#\n#############");
 
-                if (Prds != null)
-                {
-                    _context.Products.AddRange(Prds);
-                    await _context.SaveChangesAsync();
-                    return Ok("All saved");
-                }
-                return Forbid("Error");
-            }         
-        #endregion
+        //         if (Prds != null)
+        //         {
+        //             _context.Products.AddRange(Prds);
+        //             await _context.SaveChangesAsync();
+        //             return Ok("All saved");
+        //         }
+        //         return Forbid("Error");
+        //     }         
+        // #endregion
 
         // LIST ALL PRODUCTS
         [HttpGet]
