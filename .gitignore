@@ -6,3 +6,6 @@ project.lock.json
 project.fragment.lock.json
 artifacts/
 **/Properties/launchSettings.json
+
+*package.json
+node_modules*

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="sample_store_app">
+
+<head>
+    <title>index</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../node_modules/angular/angular.min.js">
+    </script>
+    <script src="../app.js"></script>
+    <script src="../controllers/productsCtrl.js"></script>
+    <script src="../services/productsApiService.js"></script>
+    <script src="../config/configValues.js"></script>
+
+</head>
+
+<body ng-controller="productsCtrl">
+
+    <h1>{{app}}</h1>
+
+    <!--{{5+5}}-->
+
+    <!--{{products}}-->
+
+    <!--<div ng-controller="productsCtrl">
+            {{app}}            
+        </div>-->
+
+    <div>
+        <h4>Result:</h4>
+        <!--{{product}}-->
+
+
+        <input type="text" name="id_name"  id="id_id" ng-model="ng_id_id">
+        <button type="" ng-click="getid(ng_id_id)">Get</button>
+
+        <button type="" 
+        ng-click="getAll()">Get All</button>
+
+
+        <br>
+        <hr>   
+
+
+        <style>
+        
+            tr td{
+                padding-left: 40px;
+                padding-right: 40px;
+            }
+        
+        </style>    
+
+        <table style="margin-top:40px; margin-bottom: 40px;">
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Image</th>
+            </tr>
+            <tr>
+                <td>{{product.data.id}}</td>
+                <td>{{product.data.title}}</td>
+                <td>{{product.data.price}}</td>
+                <td>{{product.data.image}}</td>
+            </tr>
+        </table>
+
+        <hr>
+        <br>
+
+        <table style="margin-top:40px; margin-bottom: 40px;">
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>price</th>
+                    <th>image</th>
+                </tr>
+                <tr ng-repeat="p in products">
+                    <td>{{p.id}}</td>
+                    <td>{{p.title}}</td>
+                    <td>{{p.price}}</td>
+                    <td>{{p.image}}</td>
+                </tr>
+        </table>
+
+    </div>
+</body>
+
+</html>

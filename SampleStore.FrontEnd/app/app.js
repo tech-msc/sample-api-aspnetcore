@@ -1,0 +1,1 @@
+angular.module('sample_store_app', [])

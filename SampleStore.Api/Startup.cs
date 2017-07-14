@@ -36,6 +36,12 @@ namespace SampleStore.Api
                 .AddDbContext<DataContext>
                     (options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
 
+            services.AddCors( options => {
+
+                    options.AddPolicy("ApiFree", 
+                                        builder => builder.WithOrigins("http://localhost:3000"));
+
+                });
 
             //services.AddDbContext<DataContext>();
 
@@ -62,6 +68,8 @@ namespace SampleStore.Api
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseCors("ApiFree");
 
             app.UseMvc();
         }
