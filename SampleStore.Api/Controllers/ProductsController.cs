@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace SampleStore.Api.Controllers
 {
@@ -77,7 +79,8 @@ namespace SampleStore.Api.Controllers
         // DELETE PRODUCT
         [HttpDelete]
         [Route("v1/products/{id}")]
-        public ActionResult Delete(Guid id)
+        // public ActionResult Delete(Guid id)
+        public IActionResult Delete(Guid id)
         {
             _context.Products.Remove(_context.Products.Find(id));
             _context.SaveChanges();
@@ -85,17 +88,38 @@ namespace SampleStore.Api.Controllers
         }
 
         // LIST ONE PRODUCT
+        // [HttpGet]
+        // [Route("v1/products/{id}")]
+        // public ActionResult GetByID(Guid id)
+        // public IActionResult GetByID(Guid id)
+        // {
+        //     var prod = _context.Products.Find(id);
+
+        //     if (prod != null)
+        //     {
+        //         return Ok(prod);
+        //     }
+        //     return NotFound();
+
+        // }
         [HttpGet]
         [Route("v1/products/{id}")]
-        public ActionResult GetByID(Guid id)
+        public async Task<IActionResult> GetByID(Guid id)
         {
-            var prod = _context.Products.Find(id);
+    
+            if (!ModelState.IsValid)
+              {
+                  return BadRequest(ModelState);
+              }
 
-            if (prod != null)
-            {
-                return Ok(prod);
-            }
-            return NotFound("Item not found");
+              var prod = await _context.Products.SingleOrDefaultAsync(e => e.Id == id);
+
+              if (prod == null)
+              {
+                  return NotFound();
+              }
+
+              return Ok(prod);
 
         }
 
